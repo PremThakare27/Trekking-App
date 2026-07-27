@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Staff Dashboard{% endblock %}
+{% block page_heading %}Staff Dashboard{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Staff Dashboard</h1>
+<p class="text-muted">Assigned treks and participant counts are shown here.</p>
+<div class="row g-3">
+    {% for trek in treks %}
+        <div class="col-lg-6">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h2 class="h5">{{ trek.name }}</h2>
+                        <span class="badge badge-soft">{{ trek.status }}</span>
+                    </div>
+                    <p class="trek-card-meta mb-3">{{ trek.location }} - {{ trek.difficulty }}</p>
+                    <div class="detail-grid mb-3">
+                        <div><span>Trek ID</span><strong>{{ trek.id }}</strong></div>
+                        <div><span>Duration</span><strong>{{ trek.duration_days }} days</strong></div>
+                        <div><span>Start Date</span><strong>{{ trek.start_date }}</strong></div>
+                        <div><span>End Date</span><strong>{{ trek.end_date }}</strong></div>
+                        <div><span>Available Slots</span><strong>{{ trek.available_slots }}</strong></div>
+                        <div><span>Participants</span><strong>{{ trek.booked_count }}</strong></div>
+                    </div>
+                    <p class="small text-muted">{{ trek.description or "No description added." }}</p>
+                    <a class="btn btn-sm btn-success" href="{{ url_for('manage_assigned_trek', trek_id=trek.id) }}">Manage Trek</a>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted">No treks are assigned to you yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

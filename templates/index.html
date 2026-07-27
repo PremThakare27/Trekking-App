@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Home - Trekking Management{% endblock %}
+{% block content %}
+<section class="row align-items-center g-4 mb-4">
+    <div class="col-lg-7">
+        <h1 class="display-6 fw-bold">Trekking Management Application</h1>
+        <p class="lead text-muted">Manage treks, staff approvals, bookings, slots, and trekking history with role-based dashboards.</p>
+        <div class="d-flex gap-2">
+            <a class="btn btn-success" href="{{ url_for('login') }}">Login</a>
+            <a class="btn btn-outline-success" href="{{ url_for('register') }}">Create Account</a>
+        </div>
+    </div>
+    <!-- <div class="col-lg-5">
+        <div class="simple-panel">
+            <h2 class="h5">Demo admin account</h2>
+            <p class="mb-1"><strong>Email:</strong> admin@trek.com</p>
+            <p class="mb-0"><strong>Password:</strong> admin123</p>
+        </div>
+    </div> -->
+</section>
+
+<h2 class="h4 mb-3">Open Treks</h2>
+<div class="row g-3">
+    {% for trek in treks %}
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="h5">{{ trek.name }}</h3>
+                    <p class="trek-card-meta mb-2">{{ trek.location }} - {{ trek.difficulty }}</p>
+                    <p class="mb-1">{{ trek.duration_days }} days</p>
+                    <p class="mb-0">Slots: {{ trek.available_slots }}</p>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p class="text-muted">No open treks yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

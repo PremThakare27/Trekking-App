@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+trekking.db
+.DS_Store
+work/
+outputs/

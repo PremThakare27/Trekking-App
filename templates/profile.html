@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Profile - Trekking Management{% endblock %}
+{% block page_heading %}Profile{% endblock %}
+{% block content %}
+<div class="profile-box mx-auto">
+    <h1 class="h3 mb-3">Profile</h1>
+    <form method="post">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Username</label>
+                <input class="form-control" name="name" value="{{ user.name }}" required>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Phone Number</label>
+                <input class="form-control" name="phone" value="{{ user.phone or '' }}">
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Email</label>
+                <input class="form-control" value="{{ user.email }}" disabled>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Role</label>
+                <input class="form-control" value="{{ user.role|title }}" disabled>
+            </div>
+        </div>
+
+        <hr class="my-4">
+        <h2 class="h5 mb-3">Change Password</h2>
+        <div class="row g-3">
+            <div class="col-md-4">
+                <label class="form-label">Current Password</label>
+                <input class="form-control" type="password" name="current_password">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">New Password</label>
+                <input class="form-control" type="password" name="new_password" minlength="6">
+            </div>
+            <div class="col-md-4">
+                <label class="form-label">Confirm New Password</label>
+                <input class="form-control" type="password" name="confirm_password" minlength="6">
+            </div>
+        </div>
+        <button class="btn btn-success mt-4" type="submit">Save Profile</button>
+    </form>
+</div>
+{% endblock %}

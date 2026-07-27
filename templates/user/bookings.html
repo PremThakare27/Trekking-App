@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% block title %}My Bookings{% endblock %}
+{% block page_heading %}My Bookings{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Booking Status and History</h1>
+
+<div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Trek</th>
+            <th>Location</th>
+            <th>Difficulty</th>
+            <th>Dates</th>
+            <th>Booked On</th>
+            <th>Trek Status</th>
+            <th>Booking Status</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for booking in bookings %}
+            <tr>
+                <td>{{ booking.id }}</td>
+                <td>{{ booking.trek_name }}</td>
+                <td>{{ booking.location }}</td>
+                <td>{{ booking.difficulty }}</td>
+                <td>{{ booking.start_date }} to {{ booking.end_date }}</td>
+                <td>{{ booking.booking_date }}</td>
+                <td>{{ booking.trek_status }}</td>
+                <td>
+                    {% if booking.status == "Cancelled" %}
+                        Cancelled
+                    {% elif booking.trek_status == "Completed" %}
+                        Completed
+                    {% elif booking.trek_status == "Closed" %}
+                        Trek Closed
+                    {% else %}
+                        {{ booking.status }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if booking.status == "Booked" and booking.trek_status == "Open" %}
+                        <form method="post" action="{{ url_for('cancel_booking', booking_id=booking.id) }}">
+                            <button class="btn btn-sm btn-outline-danger" type="submit">Cancel</button>
+                        </form>
+                    {% elif booking.status == "Booked" and booking.trek_status == "Completed" %}
+                        Completed
+                    {% elif booking.status == "Booked" and booking.trek_status == "Closed" %}
+                        Not available
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% else %}
+            <tr><td colspan="9" class="text-muted">No booking history yet.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

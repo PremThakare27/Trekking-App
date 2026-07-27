@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Assign Staff{% endblock %}
+{% block page_heading %}Assign Staff{% endblock %}
+{% block content %}
+<h1 class="h3 mb-3">Assign Staff to Trek</h1>
+<form method="post" class="simple-panel mb-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Trek</label>
+            <select class="form-select" name="trek_id" required>
+                {% for trek in treks %}
+                    <option value="{{ trek.id }}">{{ trek.name }} - {{ trek.location }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Active Staff</label>
+            <select class="form-select" name="staff_id" required>
+                {% for person in staff %}
+                    <option value="{{ person.id }}">{{ person.name }} ({{ person.email }})</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-success mt-3" type="submit">Assign</button>
+</form>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead><tr><th>Trek</th><th>Current Staff</th><th>Status</th></tr></thead>
+        <tbody>
+        {% for trek in treks %}
+            <tr><td>{{ trek.name }}</td><td>{{ trek.staff_name or "Not assigned" }}</td><td>{{ trek.status }}</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

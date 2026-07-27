@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Manage Assigned Trek{% endblock %}
+{% block page_heading %}Manage Trek{% endblock %}
+{% block content %}
+<a class="btn btn-sm btn-outline-secondary mb-3" href="{{ url_for('staff_dashboard') }}">Back</a>
+<h1 class="h3 mb-3">{{ trek.name }}</h1>
+<div class="simple-panel mb-4">
+    <div class="row g-3">
+        <div class="col-md-3"><div class="info-box"><span>Trek ID</span><strong>{{ trek.id }}</strong></div></div>
+        <div class="col-md-3"><div class="info-box"><span>Location</span><strong>{{ trek.location }}</strong></div></div>
+        <div class="col-md-3"><div class="info-box"><span>Difficulty</span><strong>{{ trek.difficulty }}</strong></div></div>
+        <div class="col-md-3"><div class="info-box"><span>Duration</span><strong>{{ trek.duration_days }} days</strong></div></div>
+        <div class="col-md-3"><div class="info-box"><span>Start Date</span><strong>{{ trek.start_date }}</strong></div></div>
+        <div class="col-md-3"><div class="info-box"><span>End Date</span><strong>{{ trek.end_date }}</strong></div></div>
+        <div class="col-md-3"><div class="info-box"><span>Status</span><strong>{{ trek.status }}</strong></div></div>
+        <div class="col-md-3"><div class="info-box"><span>Available Slots</span><strong>{{ trek.available_slots }}</strong></div></div>
+    </div>
+    <p class="small text-muted mt-3 mb-0">{{ trek.description or "No description added." }}</p>
+</div>
+
+<form method="post" class="simple-panel mb-4">
+    <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label">Available Slots</label>
+            <input class="form-control" type="number" min="0" name="available_slots" value="{{ trek.available_slots }}" required>
+        </div>
+        <div class="col-md-6">
+            <label class="form-label">Status</label>
+            <select class="form-select" name="status">
+                {% for value in ["Pending", "Approved", "Open", "Closed", "Completed"] %}
+                    <option value="{{ value }}" {% if trek.status == value %}selected{% endif %}>{{ value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-success mt-3" type="submit">Update Trek</button>
+</form>
+
+<h2 class="h5">Participants</h2>
+<div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead><tr><th>Booking ID</th><th>Name</th><th>Email</th><th>Phone</th><th>Status</th></tr></thead>
+        <tbody>
+        {% for participant in participants %}
+            <tr>
+                <td>{{ participant.id }}</td>
+                <td>{{ participant.name }}</td>
+                <td>{{ participant.email }}</td>
+                <td>{{ participant.phone or "-" }}</td>
+                <td>{{ participant.status }}</td>
+            </tr>
+        {% else %}
+            <tr><td colspan="5" class="text-muted">No participants yet.</td></tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
