@@ -19,6 +19,8 @@ The admin user is created automatically when the app first runs.
 
 ## How To Run
 
+The database file is created automatically when the app starts for the first time.
+
 1. Open a terminal in this project folder.
 
 2. Create a virtual environment:
