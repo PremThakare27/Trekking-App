@@ -14,6 +14,8 @@ This is a simple Flask, Jinja2, Bootstrap, and SQLite project for the App Dev I 
 
 The admin user is created automatically when the app first runs.
 
+Use the admin account first to create treks and approve staff registrations.
+
 - Email: `admin@trek.com`
 - Password: `admin123`
 
@@ -83,10 +85,10 @@ static/style.css        Small custom CSS used with Bootstrap
 - `treks`: stores trek details such as location, difficulty, slots, dates, status, and assigned staff.
 - `bookings`: stores trekker bookings and booking status.
 
-## Notes For Viva
+## Notes
 
 - Admin registration is not allowed. The admin is seeded automatically in `init_db()`.
 - Staff registration starts with `pending` status and needs admin approval.
 - Role-based access is handled by the `login_required()` decorator.
 - Overbooking is prevented in the `/user/book/<trek_id>` route by counting active booked records before inserting a new booking.
-- The project uses SQLite only, as required.
+- The project uses SQLite only.
