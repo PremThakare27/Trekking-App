@@ -46,6 +46,7 @@ def hash_password(password):
     return generate_password_hash(password, method="pbkdf2:sha256")
 
 
+# Creates all required tables and seeds the default admin account.
 def init_db():
     db = get_db()
     db.executescript(
