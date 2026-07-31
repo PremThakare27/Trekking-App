@@ -132,6 +132,7 @@ def inject_user():
     return {"current_user": current_user()}
 
 
+# Protects routes and checks whether the logged-in user has the required role.
 def login_required(role=None):
     def decorator(view):
         @wraps(view)
