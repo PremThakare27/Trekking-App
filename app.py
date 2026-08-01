@@ -527,6 +527,7 @@ def user_bookings():
 
 @app.post("/user/book/<int:trek_id>")
 @login_required("user")
+# Books an open trek and reduces the remaining slot count.
 def book_trek(trek_id):
     user = current_user()
     trek = query_one("SELECT * FROM treks WHERE id = ?", (trek_id,))
