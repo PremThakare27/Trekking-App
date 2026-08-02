@@ -577,6 +577,7 @@ def book_trek(trek_id):
 
 @app.post("/user/bookings/<int:booking_id>/cancel")
 @login_required("user")
+# Cancels an active booking and restores one available slot.
 def cancel_booking(booking_id):
     booking = query_one(
         """
