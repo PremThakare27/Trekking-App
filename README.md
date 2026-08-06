@@ -57,6 +57,8 @@ http://127.0.0.1:5000
 
 ## Suggested Demo Flow
 
+Run the validation form before submitting the final zip file.
+
 1. Login as admin using `admin@trek.com` and `admin123`.
 2. Create one or two treks from Admin > Treks.
 3. Register a staff account from the public register page.
